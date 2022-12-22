@@ -42,6 +42,8 @@ const renderTodo = (arr, node) => {
     }
 
     node.appendChild(newItem);
+    elAll.textContent = todos.length;
+    elUnComplated.textContent = todos.length;
     elInput.value = "";
   });
 };
@@ -56,9 +58,6 @@ elForm.addEventListener("submit", (evt) => {
   };
 
   todos.push(newTodo);
-
-  elAll.textContent = todos.length;
-  elUnComplated.textContent = todos.length;
 
   renderTodo(todos, elList);
 });
