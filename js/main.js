@@ -60,7 +60,6 @@ if (todos.length !== 0) {
   elList.appendChild(elTitle)
 }
 
-
 elForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
