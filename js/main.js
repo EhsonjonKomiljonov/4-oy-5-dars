@@ -51,13 +51,13 @@ const renderTodo = (arr, node) => {
   });
 };
 
-if (todos.length !== 0) {
+if (todos.length) {
   renderTodo(todos, elList);
 } else {
   const elTitle = document.createElement("h3");
   elTitle.textContent = "Todolar Yo'q 😐";
-  elTitle.setAttribute("class", "text-center text-primary")
-  elList.appendChild(elTitle)
+  elTitle.setAttribute("class", "text-center text-primary");
+  elList.appendChild(elTitle);
 }
 
 elForm.addEventListener("submit", (evt) => {
