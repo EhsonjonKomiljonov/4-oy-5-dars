@@ -5,7 +5,6 @@ const elList = document.querySelector(".js-list");
 const elAll = document.querySelector(".js-all");
 const elComplated = document.querySelector(".js-complated");
 const elUnComplated = document.querySelector(".js-uncomplated");
-const elDeleteAll = document.querySelector(".js-delete-all");
 
 const localData = JSON.parse(window.localStorage.getItem("todos"));
 const todos = localData || [];
@@ -120,10 +119,6 @@ elMainButtons.addEventListener("click", (evt) => {
       const todoFiltered = todos.filter((el) => !el.isCompleted);
       renderTodo(todoFiltered, elList);
     }
-  }
-  if (evt.target.matches(".js-delete-all")) {
-    window.localStorage.removeItem("todos");
-    renderTodo(todos, elList);
   }
 });
 
