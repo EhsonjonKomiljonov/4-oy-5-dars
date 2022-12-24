@@ -120,3 +120,25 @@ elMainButtons.addEventListener("click", (evt) => {
     }
   }
 });
+
+// DARK MODE
+
+const elModeBtn = document.querySelector(".mode-btn");
+let theme = false;
+
+elModeBtn.addEventListener("click", () => {
+  theme = !theme;
+  const newBg = theme ? "dark" : "light";
+  window.localStorage.setItem("theme", newBg);
+  newTheme();
+});
+
+let newTheme = () => {
+  if (window.localStorage.getItem("theme") == "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+};
+
+newTheme();
