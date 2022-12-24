@@ -26,14 +26,12 @@
         --btns-bg: darkcyan;
       }
 
-      html{
+      html {
         height: 100%;
       }
 
       body {
-        margin: 0;
         background: var(--body-bg);
-        background-repeat: no-repeat;
       }
 
       .mode-btn {
@@ -47,15 +45,22 @@
         background-image: var(--btn-bgi);
       }
 
-      .site-title {
-        color: var(--btns-bg);
+      .mode-btn:hover {
+        background-color: #fff !important;
       }
 
-      .btn:hover {
-        background-color: var(--btns-bg);
-        opacity: 0.8;
-        transition: all 0.2s ease;
-        color: #fff;
+      button {
+        border: none;
+        background-color: transparent;
+      }
+
+      button:hover {
+        background-color: default !important;
+        color: #fff !important;
+      }
+
+      .site-title {
+        color: var(--btns-bg);
       }
 
       .js-submit {
@@ -86,15 +91,18 @@
       </form>
       <ul class="js-list list-group w-50 mx-auto mt-5"></ul>
 
-      <div class="btn-group d-flex w-25 mx-auto mt-4 js-all-buttons">
-        <button class="btn main-btns js-all-btn">
+      <div class="btn-group d-flex w-50 mx-auto mt-4 js-all-buttons">
+        <button class="main-btns btn js-all-btn">
           All <span class="js-all"></span>
         </button>
-        <button class="btn main-btns js-complated-btn">
+        <button class="main-btns btn js-complated-btn">
           Complated <span class="js-complated"></span>
         </button>
-        <button class="btn main-btns js-uncomplated-btn">
+        <button class="main-btns btn js-uncomplated-btn">
           Un complated <span class="js-uncomplated"></span>
+        </button>
+        <button class="main-btns btn js-delete-all">
+          DELETE ALL
         </button>
       </div>
     </div>

@@ -5,11 +5,16 @@ const elList = document.querySelector(".js-list");
 const elAll = document.querySelector(".js-all");
 const elComplated = document.querySelector(".js-complated");
 const elUnComplated = document.querySelector(".js-uncomplated");
+const elDeleteAll = document.querySelector(".js-delete-all");
 
-const todos = [];
-let mainCheckeds = 0;
+const localData = JSON.parse(window.localStorage.getItem("todos"));
+const todos = localData || [];
 
 const renderTodo = (arr, node) => {
+  window.localStorage.setItem("todos", JSON.stringify(todos));
+  elAll.textContent = todos.length;
+  elComplated.textContent = todos.filter((el) => el.isCompleted).length;
+  elUnComplated.textContent = todos.filter((el) => !el.isCompleted).length;
   node.innerHTML = "";
   arr.forEach((el) => {
     const newItem = document.createElement("li");
@@ -42,17 +47,25 @@ const renderTodo = (arr, node) => {
     }
 
     node.appendChild(newItem);
-    elAll.textContent = todos.length;
-    elUnComplated.textContent = todos.length;
     elInput.value = "";
   });
 };
+
+if (todos.length !== 0) {
+  renderTodo(todos, elList);
+} else {
+  const elTitle = document.createElement("h3");
+  elTitle.textContent = "Todolar Yo'q 😐";
+  elTitle.setAttribute("class", "text-center text-primary")
+  elList.appendChild(elTitle)
+}
+
 
 elForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
   const newTodo = {
-    id: todos.length + 1,
+    id: todos.length ? todos[todos.length - 1].id - 1 : 1,
     text: elInput.value,
     isCompleted: false,
   };
@@ -85,14 +98,6 @@ elList.addEventListener("click", (evt) => {
     let findedTodo = todos.find((el) => el.id == todoId);
     findedTodo.isCompleted = !findedTodo.isCompleted;
     renderTodo(todos, elList);
-    if (findedTodo.isCompleted == true) {
-      mainCheckeds += 1;
-    }
-    if (findedTodo.isCompleted == false) {
-      mainCheckeds -= 1;
-    }
-    elComplated.textContent = mainCheckeds;
-    elUnComplated.textContent = todos.length - mainCheckeds;
   }
 });
 
@@ -107,17 +112,19 @@ elMainButtons.addEventListener("click", (evt) => {
   }
   if (evt.target.matches(".js-complated-btn")) {
     if (elComplated.textContent != 0) {
-      const todoFiltered = todos.filter((el) => el.isCompleted == true);
-      elComplated.textContent = todoFiltered.length;
+      const todoFiltered = todos.filter((el) => el.isCompleted);
       renderTodo(todoFiltered, elList);
     }
   }
   if (evt.target.matches(".js-uncomplated-btn")) {
     if (elUnComplated.textContent != 0) {
-      const todoFiltered = todos.filter((el) => el.isCompleted == false);
-      elUnComplated.textContent = todoFiltered.length;
+      const todoFiltered = todos.filter((el) => !el.isCompleted);
       renderTodo(todoFiltered, elList);
     }
+  }
+  if (evt.target.matches(".js-delete-all")) {
+    window.localStorage.removeItem("todos");
+    renderTodo(todos, elList);
   }
 });
 
